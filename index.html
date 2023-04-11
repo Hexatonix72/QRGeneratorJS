@@ -8,7 +8,7 @@
 	<script type="text/javascript" src="qrcode.js"></script>
 </head>
 <body>
-	<p id="demo"></p>
+	<p id="escapeDisclaimer"></p>
 	<div id="qrcode"></div>
 	<script type="text/javascript">
 		var maxWidth = window.innerWidth;
@@ -35,7 +35,7 @@
 				// deviceID : eventID
 			};
 		const qrdatajson = JSON.stringify(qrdata);
-		// document.getElementById("demo").innerHTML = qrdatajson;
+		document.getElementById("escapeDisclaimer").innerHTML = "Press the escape key to close this window. Make sure to save the page URL if you need to return after closing the window";
 		qrcode.makeCode(qrdatajson);
 		setTimeout(makeQR, 20000)
 		}
