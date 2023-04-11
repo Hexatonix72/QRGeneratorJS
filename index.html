@@ -11,27 +11,40 @@
 	<p id="demo"></p>
 	<div id="qrcode"></div>
 	<script type="text/javascript">
-		// function QRPage(props) {
-		// 	getElementById=props.EventID
-		// }
+		var maxWidth = window.innerWidth;
+		var maxHeight = window.innerHeight;
+		var smallerDim = Math.min(maxWidth-100, maxHeight-100);
 		var qrcode = new QRCode(document.getElementById("qrcode"), {
-			width : 300,
-			height : 300
+			width : smallerDim,
+			height : smallerDim,
+			paddingLeft : (maxWidth-smallerDim)/2,
+			paddingTop : (maxHeight-smallerDim)/2
 		});
+		// qrcode.paddingRight = (maxWidth-smallerDim)/2;
+		// qrcode.paddingBottom = (maxHeight-smallerDim)/2;
+		// const url = window.location.href;
+		// const urlObj = new URL(url);
+		// const searchParams = urlObj.searchParams;
+		// const eventID = searchParams.get('eventID');
 		function makeQR() {
 			const starttime = new Date();
 			const endtime = new Date(starttime.getTime() + 20000);
 			const qrdata = {
 				starttime : JSON.stringify(starttime.toUTCString()),
 				endtime : JSON.stringify(endtime.toUTCString()),
-				deviceID : "1"
+				// deviceID : eventID
 			};
 		const qrdatajson = JSON.stringify(qrdata);
-		document.getElementById("demo").innerHTML = qrdatajson;
+		// document.getElementById("demo").innerHTML = qrdatajson;
 		qrcode.makeCode(qrdatajson);
 		setTimeout(makeQR, 20000)
 		}
 		makeQR();
+		document.addEventListener('keydown', function(event) {
+			if (event.keyCode === 27) {
+    window.close();
+  }
+});
 	</script>
 <!-- <input id="text" type="text" value="test123" style="width:80%" /><br />
 <div id="qrcode" style="width:100px; height:100px; margin-top:15px;"></div>
